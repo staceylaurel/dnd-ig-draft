@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as morgan from 'morgan';
 import * as path from 'path';
+import * as cors from 'cors';
 import * as passport from 'passport';
 import routes from './routes';
 
@@ -8,12 +9,12 @@ import './middlewares/passport-strategies';
 
 const app = express();
 
+app.use(cors());
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(routes);
-app.use(require('cors')())
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../public/index.html')));
   
