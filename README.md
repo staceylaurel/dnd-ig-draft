@@ -1,7 +1,7 @@
 MySQL 
 
 Tables SCHEMA
-
+```mysql
 CREATE TABLE player (
     id INT AUTO_INCREMENT,
     username VARCHAR(60) NOT NULL, 
@@ -45,3 +45,4 @@ CREATE TABLE discussions (
     
 
 
+```
