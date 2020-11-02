@@ -1,18 +1,47 @@
-# Barebones React/TypeScript/Express/Sass Boilerplate
-This project is a starting point for a TypeScript based React app that also has a local API server using express.
+MySQL 
 
-There are 2 different Webpack configurations. One for the server and one for the client.
+Tables SCHEMA
 
-## Server
-The server build process compiles the TypeScript files found in `/src/server` into a single bundled JavaScript file located in the `/dist` directory.
+CREATE TABLE player (
+    id INT AUTO_INCREMENT,
+    username VARCHAR(60) NOT NULL, 
+    email VARCHAR(60) NOT NULL UNIQUE,
+    password VARCHAR(60) NOT NULL,
+    role INT DEFAULT 1,
+    created_at TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (id)
+);
 
-## Client
-The client build process compiles the React app located in `/src/client` into a bundled located at `/public/js/app.js`.
+CREATE TABLE campaigns (
+    id VARCHAR(60) NOT NULL,
+    userid INT NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (id),
+    FOREIGN KEY (userid) REFERENCES player (id) ON DELETE CASCADE
+);
 
-The client configuration will also build the Sass files found at `/src/client/scss`. The App component imports the `app.scss` file which already includes an import for Bootstrap.
+CREATE TABLE players_campaigns (
+    userid INT NOT NULL,
+    campaignid VARCHAR(60) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (userid, campaignid),
+    FOREIGN KEY (userid) REFERENCES player (id) ON DELETE CASCADE,
+    FOREIGN KEY (campaignid) REFERENCES campaigns (id) ON DELETE CASCADE
+);
 
-## Running the project
-In order to run the server, use `npm run dev`, and the server will start on port 3000 (http://localhost:3000). 
+CREATE TABLE discussions (
+    id INT AUTO_INCREMENT,
+    userid INT NOT NULL,
+    campaignid VARCHAR(60) NOT NULL,
+    image_url VARCHAR(256) NOT NULL,
+    caption VARCHAR(2000) NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    PRIMARY KEY (id),
+    FOREIGN KEY (userid) REFERENCES player (id) ON DELETE CASCADE,
+    FOREIGN KEY (campaignid) REFERENCES campaigns (id) ON DELETE CASCADE
+);
 
-Webpack will watch the files. Once you save a file, you can refresh your browser to ensure you got the updated client files. If you only change server files, you *shouldn't* need to refresh.
-# dnd-ig-draft
+    
+
+
