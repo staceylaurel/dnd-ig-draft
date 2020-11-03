@@ -1,16 +1,12 @@
-import { Query } from "../index";
+import {Query} from '../index';
 
-const all = () => Query('', []);
-const one = () => Query('', []);
-const insert = () => Query('', []);
-const update = () => Query('', []);
-const destroy = () => Query('', []);
+const find = (column: string, value: string | number) => 
+Query("SELECT * FROM players_campaigns WHERE ?? =?", [column, value]);
 
+const insert = (newPlayers_campaigns: { userid: number; campaignid: string}) => 
+Query("INSERT INTO players_campaigns SET ?", newPlayers_campaigns);
 
 export default {
-    all, 
-    one,
-    insert,
-    update,
-    destroy
+    find, 
+    insert
 }
