@@ -1,19 +1,24 @@
+import * as React from "react";
+
+
+const Player: React.FC<PlayerProps> = (props) => {
+
+
+
+return(
+    <div> 
+        <h1> Player</h1>
+    </div>
+)
 
 
 
 
+};
 
+interface PlayerProps{}
 
-
-
-
-
-
-
-
-
-
-
+export default Player;
 
 
 

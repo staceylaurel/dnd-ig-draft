@@ -1,46 +1,31 @@
 import * as React from "react";
-import { Route, Redirect } from "react-router-dom";
-// import api from "../../utils/api-service";
+import api from "../utils/api-services";
+import { Link } from "react-router-dom";
 
-
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, ...rest}) => {
-  const [checking, setChecking] = React.useState<boolean>(true);
-  const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
+const Profile: React.FC<ProfileProps> = () => {
+  
+  const [profile, setProfile] = React.useState<any>(null);
 
   React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if(!token) {
-      setChecking(false);
-    }else {
-      fetch('/auth/token/verify', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }).then(res => {
-        if (res.ok){
-          setLoggedIn(true);
-          setChecking(false);
-        }else {
-          setChecking(false);
-        }
-      })
-    }
+    api("/api/profile").then((profile) => setProfile(profile));
   }, []);
 
-    if (checking) {
-      return <h1 className="text-center display-1 text-danger"> Loading... </h1>
-    }
+  return (
+    <>
+      <h1>Welcome back, {profile?.name}!</h1>
 
-if (loggedIn) {
-  return <Route {...rest}>{children}</Route>
-} else {
-  return <Redirect to={{ pathname: '/login', state: { msg: 'You must be logged in to view this page.' }  }} />
-}
+  
+      <Link className="d-inline p-2" to="/">Go Back</Link>
+</>
+
+
+
+    
+  );
 };
 
-interface PrivateRouteProps{
- exact? : boolean,
- path: string
+interface ProfileProps{
+
 }
 
-export default PrivateRoute;
+export default Profile;

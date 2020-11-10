@@ -2,7 +2,7 @@ import * as React from "react";
 import api from "../../utils/api-services";
 import { Link, useHistory } from "react-router-dom";
 
-const Register: React.FC<RegisterProps> = (props) => {
+const RegisterDM: React.FC<RegisterDMProps> = (props) => {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -12,7 +12,7 @@ const Register: React.FC<RegisterProps> = (props) => {
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    await api("/auth/register/", "POST", { username, email, password, role });
+    await api("/auth/registerDM/", "POST", { username, email, password, role });
     history.push("/");
   };
 
@@ -47,12 +47,12 @@ const Register: React.FC<RegisterProps> = (props) => {
           type="text"
         ></input>
      
-      <button onClick={handleSubmit}>Register </button>
+      <button onClick={handleSubmit}>Register DM </button>
       <Link to={"/"}> Home </Link>
     </div>
   );
 };
 
-interface RegisterProps {}
+interface RegisterDMProps {}
 
-export default Register;
+export default RegisterDM;

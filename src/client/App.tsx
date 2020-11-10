@@ -1,36 +1,65 @@
-import * as React from 'react';
+//@ts-nocheck
+//library imports
+import * as React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+//component imports
+import Home from "././views/Home";
+import DM from "././views/DM";
+import Player from "/./views/Player";
+import Login from "././views/Login";
+import Role from "././views/Role";
+import RegisterDM from "././views/RegisterDM";
+import RegisterPlayer from "././views/RegisterPlayer";
+import PrivateRoute from "./components/PrivateRoute";
+import Discussion from "./views/Discussion";
+import ListPlayers from "./views/ListPlayers";
+import Profile from "./views/Profile";
+import UploadDiscussion from "./views/UploadDiscussion";
 
-class App extends React.Component<IAppProps, IAppState> {
-	constructor(props: IAppProps) {
-		super(props);
-		this.state = {
-			name: null
-		};
-	}
 
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
-			this.setState({ name });
-		} catch (error) {
-			console.log(error);
-		}
-	}
+const App: React.FC<AppProps> = (props) => {
+  return (
+    <BrowserRouter>
+      <NavBar />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+		  </Route>
+		  <Route exact path="/login">
+          <Login />
+        </Route>
+        <Route exact path="/DM">
+          <DM />
+        </Route>
+        <Route exact path="/Player">
+          <Player />
+        </Route>
+        <Route exact path="/Role">
+          <Role />
+        </Route>
+        <Route exact path="/registerDM">
+          <RegisterDM />
+        </Route>
+		<Route exact path="/registerPlayer">
+          <RegisterPlayer />
+		  </Route>
+        <PrivateRoute exact path="/Discussion">
+          <Discussion />
+        </PrivateRoute>
+        <PrivateRoute exact path="/ListPlayers">
+          <ListPlayers />
+        </PrivateRoute>
+		<PrivateRoute exact path="/Profile">
+          <Profile />
+        </PrivateRoute>
+		<PrivateRoute exact path="/UploadDiscussion">
+          <UploadDiscussion />
+        </PrivateRoute>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
-	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-			</main>
-		);
-	}
-}
-
-export interface IAppProps {}
-
-export interface IAppState {
-	name: string;
-}
+interface AppProps {}
 
 export default App;
