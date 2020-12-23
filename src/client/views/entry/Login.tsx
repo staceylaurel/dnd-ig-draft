@@ -1,5 +1,5 @@
 import * as React from "react";
-import api, { setStorage } from "../../utils/api-services";
+import { setStorage } from "../../utils/api-services";
 import { Link, useHistory } from "react-router-dom";
 import apiServices from "../../utils/api-services";
 
@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = props => {
 
   return (
     <div className="col-md-7 p-3 border bg-light">
-      <h1>Did you want to update this book?</h1>
+      <h1>Login</h1>
       <div className="card bg-success text-info shadow">
       
         <label> Email: </label>
@@ -32,7 +32,7 @@ const Login: React.FC<LoginProps> = props => {
           type= "text"></input>
       </div>
       <button onClick={login}>Login</button>
-      <Link to={"/"}>Bookstore Home </Link>
+      <Link to={"/"}>Home </Link>
     </div>
   );
 };

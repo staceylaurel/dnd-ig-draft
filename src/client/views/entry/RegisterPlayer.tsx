@@ -21,7 +21,7 @@ const RegisterPlayer: React.FC<RegisterPlayerProps> = (props) => {
       
       <label> Username/Character Name: </label>
         <input
-          value={name}
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
           type="text"
         ></input>

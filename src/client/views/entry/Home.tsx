@@ -21,4 +21,4 @@ const Home: React.FC<HomeProps> = (props) => {
 //Register new roll <link>
     interface HomeProps{}
     
-    export default Home;
+    export default Home; 
